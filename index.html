@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
     <title>This is a title</title>
 </head>
 <body>
     <h1>Hej!</h1>
+
+    {{ range .Films }}
+        <p>{{ .Title}} - {{ .Director }}</p>
+    {{ end }}
+
+    <form>
+        <div>
+            <label>Title</label>
+            <input type="text" name="title" id="film-title" />
+        </div>
+        <div>
+            <label>Director</label>
+            <input type="text" name="director" id="film-director" />
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
