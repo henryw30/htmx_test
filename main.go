@@ -25,6 +25,14 @@ func h1(w http.ResponseWriter, r *http.Request) {
 	templ.Execute(w, films)
 }
 
+func h2(w http.ResponseWriter, r *http.Request) {
+	title := r.PostFormValue("title")
+	director := r.PostFormValue("director")
+
+	templ := template.Must(template.ParseFiles("index.html"))
+	templ.ExecuteTemplate(w, "film-list-element", Film{Title: title, Director: director})
+}
+
 func main() {
 	fmt.Println(len(films))
 
@@ -34,6 +42,7 @@ func main() {
 	}
 
 	http.HandleFunc("/", h1)
+	http.HandleFunc("/add-film/", h2)
 	err := http.ListenAndServe("localhost:8080", nil)
 	if err != nil {
 		log.Printf("failed to open http server %v", err)

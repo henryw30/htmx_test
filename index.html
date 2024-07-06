@@ -9,11 +9,19 @@
 <body>
     <h1>Hej!</h1>
 
-    {{ range .Films }}
-        <p>{{ .Title}} - {{ .Director }}</p>
-    {{ end }}
+    <div>
+        <h1>Film List</h1>
 
-    <form>
+        <ul id="film-list">
+            {{ range .Films }}
+            {{ block "film-list-element" .}}
+                <li class="list-group-item">{{ .Title }} - {{ .Director }}</li>
+            {{ end }}
+            {{ end }}
+        </ul>
+    </div>
+
+    <form hx-post="/add-film/" hx-target="#film-list" hx-swap="beforeend">
         <div>
             <label>Title</label>
             <input type="text" name="title" id="film-title" />
